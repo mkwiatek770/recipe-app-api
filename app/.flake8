@@ -2,6 +2,5 @@
 exclude =
     migrations
     __pychache__,
-    manage.
+    manage.py
     settings.py
-    
