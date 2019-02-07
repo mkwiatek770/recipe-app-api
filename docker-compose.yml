@@ -14,7 +14,7 @@ services:
               python manage.py runserver 0.0.0.0:8000"
     environment:
       - DB_HOST=db
-      - DB_NAME=ap
+      - DB_NAME=app
       - DB_USER=postgres
       - DB_PASS=coderslab
     depends_on:

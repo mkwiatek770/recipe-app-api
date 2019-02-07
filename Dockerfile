@@ -1,5 +1,5 @@
 FROM python:3.7-alpine
-MAINTAINER Michał Kwiatek
+LABEL Maintainer="Michał Kwiatek"
 
 ENV PYTHONUNBUFFERED 1 
 
