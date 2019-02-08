@@ -73,7 +73,7 @@ class Recipe(models.Model):
     )
     title = models.CharField(max_length=255)
     time_minutes = models.PositiveSmallIntegerField()
-    price = models.DecimalField(max_digits=6, decimal_places=2)
+    price = models.FloatField()
     link = models.CharField(max_length=255, blank=True)
     ingredients = models.ManyToManyField("Ingredient")
     tags = models.ManyToManyField("Tag")

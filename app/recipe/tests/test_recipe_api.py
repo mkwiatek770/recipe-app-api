@@ -110,3 +110,63 @@ class PrivateRecipeAPITests(TestCase):
 
         self.assertEqual(res.data, serializer.data)
         self.assertEqual(res.status_code, status.HTTP_200_OK)
+
+    def test_create_basic_recipe(self):
+        """Test creating recipe"""
+        payload = {
+            'title': 'Some Tile',
+            'price': 5.20,
+            'time_minutes': 10,
+        }
+
+        res = self.client.post(RECIPES_URL, payload)
+
+        recipe = Recipe.objects.get(id=res.data['id'])
+
+        self.assertEqual(res.status_code, status.HTTP_201_CREATED)
+
+        for key in payload.keys():
+            self.assertEqual(payload[key], getattr(recipe, key))
+
+    def test_create_recipe_with_tags(self):
+        """Test creating recipe with tags"""
+
+        t1 = sample_tag(self.user)
+        t2 = sample_tag(self.user, name="Another")
+
+        payload = {
+            'title': 'Some Title',
+            'time_minutes': 10,
+            'price': 20,
+            'tags': [t1.id, t2.id]
+        }
+
+        res = self.client.post(RECIPES_URL, payload)
+        recipe = Recipe.objects.get(id=res.data['id'])
+        tags = recipe.tags.all()
+
+        self.assertEqual(res.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(tags.count(), 2)
+        self.assertIn(t1, tags)
+        self.assertIn(t2, tags)
+
+    def test_create_recipe_with_ingredients(self):
+        """Test creating recipe with ingredients"""
+        ig1 = sample_ingredient(self.user)
+        ig2 = sample_ingredient(self.user, "Chocolate")
+
+        payload = {
+            'title': 'Some title',
+            'price': 20.2,
+            'time_minutes': 10,
+            'ingredients': [ig1.id, ig2.id]
+        }
+
+        res = self.client.post(RECIPES_URL, payload)
+        recipe = Recipe.objects.get(id=res.data['id'])
+        ingredients = recipe.ingredients.all()
+
+        self.assertEqual(res.status_code, status.HTTP_201_CREATED)
+        self.assertIn(ig1, ingredients)
+        self.assertIn(ig2, ingredients)
+        self.assertEqual(ingredients.count(), 2)
