@@ -55,7 +55,8 @@ class PrivateIngredientsAPITests(TestCase):
         self.assertEqual(res.status_code, status.HTTP_200_OK)
 
     def test_limit_ingredients(self):
-        """Test that single user retrieve only created by himself ingredients"""
+        """Test that single user retrieve only
+         created by himself ingredients"""
         user2 = get_user_model().objects.create_user(
             email="other@o2.pl",
             password='pass12345'
@@ -81,7 +82,7 @@ class PrivateIngredientsAPITests(TestCase):
             "name": 'TestIngredient'
         }
 
-        res = self.client.post(INGREDIENT_URL, payload)
+        self.client.post(INGREDIENT_URL, payload)
 
         exists = Ingredient.objects.filter(
             user=self.user,
