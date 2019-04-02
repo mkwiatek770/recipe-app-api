@@ -8,6 +8,6 @@ Django REST API written with Test Driven Development that will help you with sav
 -   Django and Django REST framework
 -   Docker
 -   PostgreSQL
--   Travis
+-   TravisCI
 
-This learning project was made along a great [Udemy Course - Build a Backend REST API with Python & Django - Advanced](https://www.udemy.com/django-python-advanced/)
+
