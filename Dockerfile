@@ -15,7 +15,7 @@ WORKDIR /app
 COPY ./app /app
 
 RUN mkdir -p /vol/web/media
-RUN mkdir -p /vol/wev/static
+RUN mkdir -p /vol/web/static
 # security purpose
 RUN adduser -D user
 RUN chown -R user:user /vol/
